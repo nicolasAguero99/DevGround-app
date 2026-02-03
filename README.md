@@ -45,17 +45,44 @@
 | **Animations** | Motion (formerly Framer Motion) |
 | **Backend (Rust)** | Plugins: store, dialog, fs, opener |
 
-## Requirements
+## Installation (End Users)
+
+### Windows
+
+1. Download the `.msi` or `.exe` installer from the [Releases](https://github.com/nicolasAguero99/DevGround-app/releases) page
+2. Run the installer
+3. If Windows SmartScreen shows a warning:
+   - Click "More info"
+   - Click "Run anyway"
+4. Follow the installation wizard
+5. Launch DevGround from the Start Menu or desktop shortcut
+
+### macOS
+
+1. Download the `.dmg` file from the [Releases](https://github.com/nicolasAguero99/DevGround-app/releases) page
+2. Open the `.dmg` file
+3. Drag **DevGround** to the **Applications** folder
+4. Open Terminal and run the following commands to remove quarantine attributes:
+```bash
+   xattr -cr /Applications/DevGround.app
+```
+5. Launch DevGround from Applications or use:
+```bash
+   open /Applications/DevGround.app
+```
+
+**Note**: Since the app is not signed with an Apple Developer certificate, macOS may show security warnings. The `xattr` command removes the quarantine flag that prevents unsigned apps from running.
+
+## Requirements (Development)
 
 - [Bun](https://bun.sh/) (or Node.js if you prefer `npm`/`pnpm`)
 - [Rust](https://www.rust-lang.org/tools/install) (to build the Tauri backend)
 - System dependencies for Tauri: [official guide](https://tauri.app/develop/getting-started/prerequisites)
 
-## Installation
-
+## Installation (Development)
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/devground.git
+git clone https://github.com/nicolasAguero99/DevGround-app/issues
 cd devground
 
 # Install frontend dependencies
@@ -63,7 +90,6 @@ bun install
 ```
 
 Or with npm:
-
 ```bash
 npm install
 ```
@@ -71,13 +97,11 @@ npm install
 ## Development
 
 Run the app in development mode (Vite frontend + Tauri window):
-
 ```bash
 bun run tauri dev
 ```
 
 With npm:
-
 ```bash
 npm run tauri dev
 ```
@@ -87,7 +111,6 @@ The frontend is served at `http://localhost:1420` and the Tauri window opens aut
 ## Testing
 
 Tests use [Vitest](https://vitest.dev/) and [Testing Library](https://testing-library.com/). The Tauri store is mocked in `src/test/setup.ts` so tests run without the Tauri runtime.
-
 ```bash
 bun run test        # watch mode
 bun run test:run    # single run
@@ -98,7 +121,6 @@ Covered areas: document generation (Playground/Sandbox), debounce, custom theme 
 ## Production build
 
 Build the executable and installers:
-
 ```bash
 bun run tauri build
 ```
@@ -106,7 +128,6 @@ bun run tauri build
 Artifacts are in `src-tauri/target/release/` (and in `bundle/` depending on the platform).
 
 ## Project structure
-
 ```
 ├── src/                    # Frontend (React + Vite)
 │   ├── api/                # Backend calls (e.g. AI suggestions)
