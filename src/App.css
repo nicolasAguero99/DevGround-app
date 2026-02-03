@@ -1,0 +1,275 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #101012;
+  --color-secondary: #f4f4f4;
+  --color-tertiary: #165dfc;
+  --color-background-screen: #09090b;
+  --color-header-section-block: #18181a;
+  --color-border-section-block: #27272a;
+  --color-html: #ff7f50;
+  --color-css: #00bfff;
+  --color-js: #ffff00;
+  --color-preview: #00ff00;
+  --color-console: #0000ff;
+}
+
+:root {
+  --overflow-x-by-layout: hidden;
+  --overflow-y-by-layout: hidden;
+  --log: #ffffff;
+  --info: #2b7fff;
+  --error: #fb2c37;
+  --warn: #f1b100;
+  --time: #8a4fff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: transparent;
+  margin: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-secondary) 50%, transparent);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--color-secondary) 70%, transparent);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: color-mix(in srgb, var(--color-secondary) 90%, transparent);
+}
+
+#app-body {
+  background-color: var(--color-background-screen);
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden;
+  height: 100vh; */
+}
+
+.layout-two-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.8fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.layout-two-two > section:last-child {
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
+}
+
+.layout-horizontal {
+  display: flex;
+  flex-direction: row;
+  min-width: fit-content;
+  height: 100%;
+}
+
+.layout-horizontal.expanded > section {
+  min-width: 500px;
+  width: auto;
+  flex-shrink: 0;
+  height: 100%;
+  flex: 0 0 auto;
+}
+
+.layout-vertical {
+  display: flex;
+  flex-direction: column;
+  min-height: fit-content;
+  height: 100%;
+}
+
+.layout-vertical.expanded > section {
+  height: 400px;
+  flex-shrink: 0;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.container {
+  height: 100vh;
+  min-width: 100%;
+}
+
+.split {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.split-column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Permitir que los widgets de Monaco (sugerencias) se muestren por encima de los paneles */
+.split > div:not(.gutter),
+.split-column > div:not(.gutter) {
+  position: relative;
+  overflow: visible;
+}
+
+.split.split-vertical {
+  flex-direction: column;
+}
+
+/* Paneles */
+/* .panel {
+  background: #1e1e1e;
+  color: white;
+  font-family: monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #222;
+} */
+
+/* Gutters */
+.gutter {
+  @apply bg-secondary;
+}
+
+.gutter.gutter-horizontal {
+  background-color: var(--color-secondary);
+  cursor: col-resize;
+  position: relative;
+}
+
+.gutter.gutter-horizontal::before {
+  content: "";
+  position: absolute;
+  opacity: 0.2;
+  transform: translate(-45%, 0);
+  top: 0px;
+  height: 100%;
+  width: 20px;
+  cursor: col-resize;
+  z-index: 1000;
+}
+
+.gutter.gutter-vertical {
+  background-color: var(--color-secondary);
+  cursor: row-resize;
+  position: relative;
+}
+
+.gutter.gutter-vertical::before {
+  content: "";
+  position: absolute;
+  opacity: 0.2;
+  transform: translate(0, -45%);
+  top: 0px;
+  height: 20px;
+  width: 100%;
+  cursor: row-resize;
+  z-index: 1000;
+}
+
+.output {
+  background: white;
+  color: black;
+}
+
+/* Asegurar que los widgets de sugerencias de Monaco se muestren correctamente */
+.monaco-editor .suggest-widget {
+  z-index: 10000 !important;
+}
+
+.monaco-editor .monaco-hover {
+  z-index: 10001 !important;
+}
+
+/* Contenedor de widgets flotantes de Monaco */
+.monaco-editor .overflow-guard {
+  overflow: visible !important;
+}
+
+.entry-switch-button-container {
+  animation: fadeOutSwitch 3s linear;
+}
+
+.entry-switch-button-container > div {
+  animation: entrySwitchButton 3s linear;
+}
+
+@keyframes fadeOutSwitch {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes entrySwitchButton {
+  0% {
+    transform: translateX(-40px);
+  }
+  90% {
+    transform: translateX(-40px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.overflow-by-layout {
+  overflow-x: var(--overflow-x-by-layout);
+  overflow-y: var(--overflow-y-by-layout);
+}
+
+.custom-number-input {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.custom-alert-modal-button {
+  transition: all 0.3s ease-in-out;
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  border: 1px solid transparent;
+}
+
+.custom-alert-modal-button:hover {
+  background-color: var(--color-header-section-block);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+  transform: scale(.95);
+}
+
+.custom-hover-choose-option > div {
+  transition: flex 2s ease-out;
+  flex: 1;
+}
+
+.custom-hover-choose-option:hover > div:not(:hover) {
+  flex: 0;
+}
+
+.custom-shadow-choose-option:hover {
+  transition: box-shadow 2s ease-out;
+  box-shadow: inset 0 0 80px 10px rgb(255, 255, 255);
+}
