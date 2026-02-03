@@ -1,6 +1,6 @@
 {
   "name": "devground",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A desktop application for experimenting with HTML, CSS, and JavaScript in real time.",
   "license": "MIT",
   "repository": {
